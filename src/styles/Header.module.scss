@@ -1,0 +1,65 @@
+@use "../App.scss" as App;
+
+.header {
+   background-color: App.$lightgrey;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   z-index: 1000;
+
+   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+   border-bottom: 1px solid #e3e3e3;
+}
+
+.headerContent {
+   display: flex;
+   justify-items: center;
+   align-items: center;
+
+   .logo {
+      display: flex;
+      flex-grow: 1;
+   }
+
+   form {
+      display: flex;
+      gap: 0.5rem;
+      padding: 1rem 0;
+      flex-grow: 3;
+      flex-shrink: 1;
+
+      input {
+         width: 100%;
+         padding: 0.4rem 0.8rem;
+         transition: 0.2s;
+         border-radius: 4px;
+         background-color: #f5f5f5;
+         border: 2px solid #d1dae3;
+      }
+
+      input:focus {
+         box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+      }
+
+      .searchButton {
+         color: #2d2d2d;
+         padding: 0 0.8rem;
+         border-radius: 4px;
+         background-color: #cee1f4;
+         border: 2px solid #c5d7e9;
+         transition: 0.2s;
+      }
+
+      .searchButton:hover {
+         color: #000000;
+         background-color: #c5d7e9;
+      }
+   }
+
+   .about {
+      display: flex;
+      flex-grow: 1;
+      justify-content: end;
+   }
+}
