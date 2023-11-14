@@ -62,7 +62,7 @@ function PlayerPage() {
    }, [playerName]);
 
    if (loading) {
-      document.title = "Carregando... - MushMC Player Stats";
+      document.title = "Carregando... | MushMC Player Stats";
       return <p>Carregando...</p>;
    }
    if (error) return <p>{error}</p>;
@@ -73,7 +73,7 @@ function PlayerPage() {
             <main>
                <Helmet>
                   <title>
-                     {data.response.account.username} - MushMC Player Stats
+                     {data.response.account.username} | MushMC Player Stats
                   </title>
                   <link
                      rel="shortcut icon"
@@ -169,7 +169,8 @@ function PlayerPage() {
                                  <span
                                     style={{
                                        color: `${data.response.clan.tag_color}`,
-                                       fontWeight: "600",
+                                       textShadow:
+                                          "1px 1px 1px rgba(0, 0, 0, 0.25)",
                                     }}
                                  >
                                     {data.response.clan.tag}
@@ -187,7 +188,8 @@ function PlayerPage() {
                               <span
                                  style={{
                                     color: `${data.response.best_tag.color}`,
-                                    fontWeight: "600",
+                                    textShadow:
+                                       "1px 1px 1px rgba(0, 0, 0, 0.3)",
                                  }}
                               >
                                  {data.response.best_tag.name.toUpperCase()}
