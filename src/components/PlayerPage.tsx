@@ -32,6 +32,13 @@ type PlayerData = {
       };
       first_login?: number;
       last_login?: number;
+      stats: {
+         bedwars: {
+            kills: number;
+            deaths: number;
+            level: number;
+         };
+      };
    };
 };
 
@@ -70,17 +77,17 @@ function PlayerPage() {
    if (data)
       return (
          <HelmetProvider>
+            <Helmet>
+               <title>
+                  {data.response.account.username} | MushMC Player Stats
+               </title>
+               <link
+                  rel="shortcut icon"
+                  href={`https://mineskin.eu/helm/${playerName}/16.png`}
+                  type="image/x-icon"
+               />
+            </Helmet>
             <main>
-               <Helmet>
-                  <title>
-                     {data.response.account.username} | MushMC Player Stats
-                  </title>
-                  <link
-                     rel="shortcut icon"
-                     href={`https://mineskin.eu/helm/${playerName}/16.png`}
-                     type="image/x-icon"
-                  />
-               </Helmet>
                <section className={styles.playerSummaryContainer}>
                   <div className={styles.playerHead}>
                      <h1 className={styles.playerName}>
@@ -94,7 +101,7 @@ function PlayerPage() {
                         )}
                      </h1>
                      {skeleton && (
-                        <Skeleton width={150} height={150} borderRadius={4} />
+                        <Skeleton width={150} height={146} borderRadius={4} />
                      )}
                      <img
                         onLoad={handlePlayerHeadLoad}
@@ -110,101 +117,93 @@ function PlayerPage() {
                      )}
                   </div>
 
-                  <div className={styles.playerInfoContainer}>
-                     <div className={styles.playerInfo}>
-                        {/* Online? */}
-                        <dl>
-                           <dt>Status</dt>
-                           <dd>
-                              {data.response.connected ? (
-                                 <span style={{ color: "#0db91b" }}>
-                                    Online
-                                 </span>
-                              ) : (
-                                 <span style={{ color: "#9b9b9b" }}>
-                                    Offline
-                                 </span>
-                              )}
-                           </dd>
-                        </dl>
-
-                        {/* Ultimo login */}
-                        {!data.response.connected &&
-                           data.response.last_login && (
-                              <dl>
-                                 <dt>Último login</dt>
-                                 <dd>
-                                    {millisecondsToDate(
-                                       data.response.last_login
-                                    )}
-                                 </dd>
-                              </dl>
+                  <dl className={styles.playerInfo}>
+                     {/* Online? */}
+                     <div className={styles.wrapper}>
+                        <dt>Status</dt>
+                        <dd>
+                           {data.response.connected ? (
+                              <span style={{ color: "#0db91b" }}>Online</span>
+                           ) : (
+                              <span style={{ color: "#9b9b9b" }}>Offline</span>
                            )}
+                        </dd>
+                     </div>
 
-                        {/* Primeiro login */}
-                        {data.response.first_login && (
-                           <dl>
-                              <dt>Primeiro login</dt>
-                              <dd>
-                                 {millisecondsToDate(data.response.first_login)}
-                              </dd>
-                           </dl>
-                        )}
-
-                        {/* Original? */}
-                        <dl>
-                           <dt>Tipo de conta</dt>
+                     {/* Ultimo login */}
+                     {!data.response.connected && data.response.last_login && (
+                        <div className={styles.wrapper}>
+                           <dt>Último login</dt>
                            <dd>
-                              {data.response.account.type == "PREMIUM"
-                                 ? "Original"
-                                 : "Pirata"}
+                              {millisecondsToDate(data.response.last_login)}
                            </dd>
-                        </dl>
+                        </div>
+                     )}
 
-                        {/* Clan? */}
-                        <dl>
-                           <dt>Clan</dt>
+                     {/* Primeiro login */}
+                     {data.response.first_login && (
+                        <div className={styles.wrapper}>
+                           <dt>Primeiro login</dt>
                            <dd>
-                              {data.response.clan ? (
-                                 <span
-                                    style={{
-                                       color: `${data.response.clan.tag_color}`,
-                                       textShadow:
-                                          "1px 1px 1px rgba(0, 0, 0, 0.25)",
-                                    }}
-                                 >
-                                    {data.response.clan.tag}
-                                 </span>
-                              ) : (
-                                 "-"
-                              )}
+                              {millisecondsToDate(data.response.first_login)}
                            </dd>
-                        </dl>
+                        </div>
+                     )}
 
-                        {/* Melhor tag */}
-                        <dl>
-                           <dt>Melhor tag</dt>
-                           <dd>
+                     {/* Original? */}
+                     <div className={styles.wrapper}>
+                        <dt>Tipo de conta</dt>
+                        <dd>
+                           {data.response.account.type == "PREMIUM"
+                              ? "Original"
+                              : "Pirata"}
+                        </dd>
+                     </div>
+
+                     {/* Clan? */}
+                     <div className={styles.wrapper}>
+                        <dt>Clan</dt>
+                        <dd>
+                           {data.response.clan ? (
                               <span
                                  style={{
-                                    color: `${data.response.best_tag.color}`,
+                                    color: `${data.response.clan.tag_color}`,
                                     textShadow:
-                                       "1px 1px 1px rgba(0, 0, 0, 0.3)",
+                                       "1px 1px 1px rgba(0, 0, 0, 0.25)",
                                  }}
                               >
-                                 {data.response.best_tag.name.toUpperCase()}
+                                 {data.response.clan.tag}
                               </span>
-                           </dd>
-                        </dl>
-
-                        {/* Discord? */}
-                        <dl>
-                           <dt>Discord</dt>
-                           <dd>{data.response.discord?.name || "-"}</dd>
-                        </dl>
+                           ) : (
+                              "-"
+                           )}
+                        </dd>
                      </div>
-                  </div>
+
+                     {/* Melhor tag */}
+                     <div className={styles.wrapper}>
+                        <dt>Melhor tag</dt>
+                        <dd>
+                           <span
+                              style={{
+                                 color: `${data.response.best_tag.color}`,
+                                 textShadow: "1px 1px 1px rgba(0, 0, 0, 0.3)",
+                              }}
+                           >
+                              {data.response.best_tag.name.toUpperCase()}
+                           </span>
+                        </dd>
+                     </div>
+
+                     {/* Discord? */}
+                     <div className={styles.wrapper}>
+                        <dt>Discord</dt>
+                        <dd>{data.response.discord?.name || "-"}</dd>
+                     </div>
+                  </dl>
                </section>
+
+               <section className={styles.statsContainer}></section>
             </main>
          </HelmetProvider>
       );
