@@ -17,7 +17,7 @@
    grid-template-columns: max-content 1fr;
    align-items: center;
    gap: 5.5rem;
-   padding-top: 1.5rem;
+   padding: 1.5rem 0 3.5rem;
 }
 
 .playerHead {
@@ -57,19 +57,21 @@
    background-color: App.$lightgrey;
    padding: 1.3rem 2.5rem;
 
-   .wrapper {
-      display: flex;
-      justify-content: space-between;
-      line-height: 35px;
-   }
-
    dt {
       color: #1f1f1f;
       font-weight: 600;
    }
 }
 
-.statsContainer {
+.wrapper {
    display: flex;
-   flex-wrap: wrap;
+   justify-content: space-between;
+   line-height: 35px;
+}
+
+.statsContainer {
+   display: grid;
+   justify-items: center;
+   border-top: 2px solid #d1dae3;
+   padding-top: 3.5rem;
 }
