@@ -71,7 +71,9 @@
 
 .statsContainer {
    display: grid;
+   gap: 1rem;
    justify-items: center;
    border-top: 2px solid #d1dae3;
    padding-top: 3.5rem;
+   padding-bottom: 10rem;
 }

@@ -24,6 +24,8 @@ type PlayerData = {
       last_login?: number;
       stats: {
          bedwars: BedwarsStats;
+         skywars_r1: SkywarsStats;
+         hungergames: HungerGamesStats;
       };
    };
 };
@@ -128,4 +130,68 @@ interface BedwarsStats {
    "4v4_max_winstreak"?: number;
    "4v4_wins"?: number;
    "4v4_winstreak"?: number;
+}
+
+interface SkywarsStats {
+   level: number;
+   max_winstreak?: number;
+   deaths?: number;
+   deaths_solo?: number;
+   deaths_team?: number;
+   kills?: number;
+   kills_solo?: number;
+   kills_team?: number;
+   level_badge: {
+      format: string;
+      hex_color: string;
+      min_level: number;
+      symbol: string;
+      type: string;
+   };
+   losses?: number;
+   losses_solo?: number;
+   losses_team?: number;
+   wins?: number;
+   wins_solo?: number;
+   wins_team?: number;
+   winstreak?: number;
+}
+
+interface HungerGamesStats {
+   doublekit_ranking: {
+      hex_color: string;
+      id: string;
+      name: string;
+      symbol: string;
+   };
+   games_played?: number;
+   assists?: number;
+   deaths?: number;
+   kills?: number;
+   max_kills?: number;
+   wins?: number;
+
+   mode_doublekit_assists?: number;
+   mode_doublekit_deaths?: number;
+   mode_doublekit_games_played?: number;
+   mode_doublekit_kills?: number;
+   mode_doublekit_wins?: number;
+
+   mode_minimush_games_played?: number;
+   mode_minimush_assists?: number;
+   mode_minimush_deaths?: number;
+   mode_minimush_kills?: number;
+   mode_minimush_wins?: number;
+
+   mode_megamush_games_played?: number;
+   mode_megamush_assists?: number;
+   mode_megamush_deaths?: number;
+   mode_megamush_kills?: number;
+   mode_megamush_wins?: number;
+
+   mode_quarterquell_games_played?: number;
+   mode_quarterquell_assists?: number;
+   mode_quarterquell_deaths?: number;
+   mode_quarterquell_kills?: number;
+   mode_quarterquell_wins?: number;
 }

@@ -16,8 +16,7 @@ body {
 }
 
 main {
-   min-height: calc(100vh - 4.55rem);
-   padding-bottom: 2rem;
+   min-height: calc(100vh - 92px);
 }
 
 a {
@@ -82,10 +81,10 @@ h2 {
 }
 
 .loading {
-   width: 55px;
-   height: 55px;
+   width: 50px;
+   height: 50px;
    border-radius: 50%;
-   border: 7px solid #717c87;
+   border: 6px solid #717c87;
    border-right-color: transparent;
    animation: loading 1s infinite;
 }

@@ -1,7 +1,12 @@
 import styles from "../../styles/AccordionItem.module.scss";
 import useOpenAccordion from "../../hooks/useOpenAccordion.tsx";
 import DownIcon from "../../assets/img/icons/down.svg";
-import UpIcon from "../../assets/img/icons/up.svg";
+import BedIcon from "../../assets/img/icons/bed.png";
+import {
+   calculateRatio,
+   formatNumber,
+   extractSymbol,
+} from "../../functions.ts";
 
 type BedwarsProps = {
    data: BedwarsStats;
@@ -10,41 +15,20 @@ type BedwarsProps = {
 function Bedwars({ data }: BedwarsProps) {
    const { handleAccordionClick, accordionPanel } = useOpenAccordion();
 
-   console.log(!accordionPanel.current?.classList.contains(styles.active));
-
-   function calculateRatio(
-      value1: number | undefined,
-      value2: number | undefined
-   ) {
-      if (!value1 || !value2) return "-";
-      const ratio = (value1 / value2).toFixed(2);
-      return ratio;
-   }
-
-   function formatNumber(value: number | undefined) {
-      if (!value) return "-";
-      return value.toLocaleString("pt-BR");
-   }
-
-   function extractSymbol(symbol: string) {
-      const regex = /[^A-Za-z0-9&[\]]/;
-      const match = symbol.match(regex);
-
-      if (match) return match[0];
-      else return null;
-   }
-
    return (
       <div className={styles.accordionContainer}>
          <div className={styles.accordion} onClick={handleAccordionClick}>
-            <h3>Bedwars</h3>
+            <div className={styles.minigameName}>
+               <img src={BedIcon} alt="Cama" />
+               <h2>Bedwars</h2>
+            </div>
 
             <div className={styles.accordionDesc}>
                <p>
                   Nível:{" "}
                   {data.level ? (
                      <span
-                        className={styles.bedwarsLevel}
+                        className={styles.minigameLevel}
                         style={{
                            color: `${data.level_badge.hex_color}`,
                            textShadow: "rgba(0, 0, 0, 0.3) 1px 1px 1px",
@@ -58,6 +42,7 @@ function Bedwars({ data }: BedwarsProps) {
                   )}
                </p>
                <p>Winstreak: {data.winstreak || "-"}</p>
+               <p>Maior winstreak: {data.max_winstreak || "-"}</p>
             </div>
 
             <button className={styles.accordionItemButton}>
@@ -85,13 +70,13 @@ function Bedwars({ data }: BedwarsProps) {
                <tbody>
                   <tr>
                      <td>Total</td>
-                     <td>{formatNumber(data.wins) || "-"}</td>
-                     <td>{formatNumber(data.losses) || "-"}</td>
-                     <td>{formatNumber(data.kills) || "-"}</td>
-                     <td>{formatNumber(data.deaths) || "-"}</td>
-                     <td>{formatNumber(data.final_kills) || "-"}</td>
-                     <td>{formatNumber(data.final_deaths) || "-"}</td>
-                     <td>{formatNumber(data.beds_broken) || "-"}</td>
+                     <td>{formatNumber(data.wins)}</td>
+                     <td>{formatNumber(data.losses)}</td>
+                     <td>{formatNumber(data.kills)}</td>
+                     <td>{formatNumber(data.deaths)}</td>
+                     <td>{formatNumber(data.final_kills)}</td>
+                     <td>{formatNumber(data.final_deaths)}</td>
+                     <td>{formatNumber(data.beds_broken)}</td>
                      <td>{calculateRatio(data.wins, data.losses)}</td>
                      <td>{calculateRatio(data.kills, data.deaths)}</td>
                      <td>
@@ -101,13 +86,13 @@ function Bedwars({ data }: BedwarsProps) {
 
                   <tr>
                      <td>Solo</td>
-                     <td>{formatNumber(data.solo_wins) || "-"}</td>
-                     <td>{formatNumber(data.solo_losses) || "-"}</td>
-                     <td>{formatNumber(data.solo_kills) || "-"}</td>
-                     <td>{formatNumber(data.solo_deaths) || "-"}</td>
-                     <td>{formatNumber(data.solo_final_kills) || "-"}</td>
-                     <td>{formatNumber(data.solo_final_deaths) || "-"}</td>
-                     <td>{formatNumber(data.solo_beds_broken) || "-"}</td>
+                     <td>{formatNumber(data.solo_wins)}</td>
+                     <td>{formatNumber(data.solo_losses)}</td>
+                     <td>{formatNumber(data.solo_kills)}</td>
+                     <td>{formatNumber(data.solo_deaths)}</td>
+                     <td>{formatNumber(data.solo_final_kills)}</td>
+                     <td>{formatNumber(data.solo_final_deaths)}</td>
+                     <td>{formatNumber(data.solo_beds_broken)}</td>
                      <td>{calculateRatio(data.solo_wins, data.solo_losses)}</td>
                      <td>
                         {calculateRatio(data.solo_kills, data.solo_deaths)}
@@ -122,13 +107,13 @@ function Bedwars({ data }: BedwarsProps) {
 
                   <tr>
                      <td>Duplas</td>
-                     <td>{formatNumber(data.doubles_wins) || "-"}</td>
-                     <td>{formatNumber(data.doubles_losses) || "-"}</td>
-                     <td>{formatNumber(data.doubles_kills) || "-"}</td>
-                     <td>{formatNumber(data.doubles_deaths) || "-"}</td>
-                     <td>{formatNumber(data.doubles_final_kills) || "-"}</td>
-                     <td>{formatNumber(data.doubles_final_deaths) || "-"}</td>
-                     <td>{formatNumber(data.doubles_beds_broken) || "-"}</td>
+                     <td>{formatNumber(data.doubles_wins)}</td>
+                     <td>{formatNumber(data.doubles_losses)}</td>
+                     <td>{formatNumber(data.doubles_kills)}</td>
+                     <td>{formatNumber(data.doubles_deaths)}</td>
+                     <td>{formatNumber(data.doubles_final_kills)}</td>
+                     <td>{formatNumber(data.doubles_final_deaths)}</td>
+                     <td>{formatNumber(data.doubles_beds_broken)}</td>
                      <td>
                         {calculateRatio(data.doubles_wins, data.doubles_losses)}
                      </td>
@@ -148,15 +133,13 @@ function Bedwars({ data }: BedwarsProps) {
 
                   <tr>
                      <td>Trios</td>
-                     <td>{formatNumber(data["3v3v3v3_wins"]) || "-"}</td>
-                     <td>{formatNumber(data["3v3v3v3_losses"]) || "-"}</td>
-                     <td>{formatNumber(data["3v3v3v3_kills"]) || "-"}</td>
-                     <td>{formatNumber(data["3v3v3v3_deaths"]) || "-"}</td>
-                     <td>{formatNumber(data["3v3v3v3_final_kills"]) || "-"}</td>
-                     <td>
-                        {formatNumber(data["3v3v3v3_final_deaths"]) || "-"}
-                     </td>
-                     <td>{formatNumber(data["3v3v3v3_beds_broken"]) || "-"}</td>
+                     <td>{formatNumber(data["3v3v3v3_wins"])}</td>
+                     <td>{formatNumber(data["3v3v3v3_losses"])}</td>
+                     <td>{formatNumber(data["3v3v3v3_kills"])}</td>
+                     <td>{formatNumber(data["3v3v3v3_deaths"])}</td>
+                     <td>{formatNumber(data["3v3v3v3_final_kills"])}</td>
+                     <td>{formatNumber(data["3v3v3v3_final_deaths"])}</td>
+                     <td>{formatNumber(data["3v3v3v3_beds_broken"])}</td>
                      <td>
                         {calculateRatio(
                            data["3v3v3v3_wins"],
@@ -179,15 +162,13 @@ function Bedwars({ data }: BedwarsProps) {
 
                   <tr>
                      <td>Quartetos</td>
-                     <td>{formatNumber(data["4v4v4v4_wins"]) || "-"}</td>
-                     <td>{formatNumber(data["4v4v4v4_losses"]) || "-"}</td>
-                     <td>{formatNumber(data["4v4v4v4_kills"]) || "-"}</td>
-                     <td>{formatNumber(data["4v4v4v4_deaths"]) || "-"}</td>
-                     <td>{formatNumber(data["4v4v4v4_final_kills"]) || "-"}</td>
-                     <td>
-                        {formatNumber(data["4v4v4v4_final_deaths"]) || "-"}
-                     </td>
-                     <td>{formatNumber(data["4v4v4v4_beds_broken"]) || "-"}</td>
+                     <td>{formatNumber(data["4v4v4v4_wins"])}</td>
+                     <td>{formatNumber(data["4v4v4v4_losses"])}</td>
+                     <td>{formatNumber(data["4v4v4v4_kills"])}</td>
+                     <td>{formatNumber(data["4v4v4v4_deaths"])}</td>
+                     <td>{formatNumber(data["4v4v4v4_final_kills"])}</td>
+                     <td>{formatNumber(data["4v4v4v4_final_deaths"])}</td>
+                     <td>{formatNumber(data["4v4v4v4_beds_broken"])}</td>
                      <td>
                         {calculateRatio(
                            data["4v4v4v4_wins"],
@@ -210,13 +191,13 @@ function Bedwars({ data }: BedwarsProps) {
 
                   <tr>
                      <td>1v1</td>
-                     <td>{formatNumber(data["1v1_wins"]) || "-"}</td>
-                     <td>{formatNumber(data["1v1_losses"]) || "-"}</td>
-                     <td>{formatNumber(data["1v1_kills"]) || "-"}</td>
-                     <td>{formatNumber(data["1v1_deaths"]) || "-"}</td>
-                     <td>{formatNumber(data["1v1_final_kills"]) || "-"}</td>
-                     <td>{formatNumber(data["1v1_final_deaths"]) || "-"}</td>
-                     <td>{formatNumber(data["1v1_beds_broken"]) || "-"}</td>
+                     <td>{formatNumber(data["1v1_wins"])}</td>
+                     <td>{formatNumber(data["1v1_losses"])}</td>
+                     <td>{formatNumber(data["1v1_kills"])}</td>
+                     <td>{formatNumber(data["1v1_deaths"])}</td>
+                     <td>{formatNumber(data["1v1_final_kills"])}</td>
+                     <td>{formatNumber(data["1v1_final_deaths"])}</td>
+                     <td>{formatNumber(data["1v1_beds_broken"])}</td>
                      <td>
                         {calculateRatio(data["1v1_wins"], data["1v1_losses"])}
                      </td>
@@ -233,13 +214,13 @@ function Bedwars({ data }: BedwarsProps) {
 
                   <tr>
                      <td>2v2</td>
-                     <td>{formatNumber(data["2v2_wins"]) || "-"}</td>
-                     <td>{formatNumber(data["2v2_losses"]) || "-"}</td>
-                     <td>{formatNumber(data["2v2_kills"]) || "-"}</td>
-                     <td>{formatNumber(data["2v2_deaths"]) || "-"}</td>
-                     <td>{formatNumber(data["2v2_final_kills"]) || "-"}</td>
-                     <td>{formatNumber(data["2v2_final_deaths"]) || "-"}</td>
-                     <td>{formatNumber(data["2v2_beds_broken"]) || "-"}</td>
+                     <td>{formatNumber(data["2v2_wins"])}</td>
+                     <td>{formatNumber(data["2v2_losses"])}</td>
+                     <td>{formatNumber(data["2v2_kills"])}</td>
+                     <td>{formatNumber(data["2v2_deaths"])}</td>
+                     <td>{formatNumber(data["2v2_final_kills"])}</td>
+                     <td>{formatNumber(data["2v2_final_deaths"])}</td>
+                     <td>{formatNumber(data["2v2_beds_broken"])}</td>
                      <td>
                         {calculateRatio(data["2v2_wins"], data["2v2_losses"])}
                      </td>
@@ -256,13 +237,13 @@ function Bedwars({ data }: BedwarsProps) {
 
                   <tr>
                      <td>3v3</td>
-                     <td>{formatNumber(data["3v3_wins"]) || "-"}</td>
-                     <td>{formatNumber(data["3v3_losses"]) || "-"}</td>
-                     <td>{formatNumber(data["3v3_kills"]) || "-"}</td>
-                     <td>{formatNumber(data["3v3_deaths"]) || "-"}</td>
-                     <td>{formatNumber(data["3v3_final_kills"]) || "-"}</td>
-                     <td>{formatNumber(data["3v3_final_deaths"]) || "-"}</td>
-                     <td>{formatNumber(data["3v3_beds_broken"]) || "-"}</td>
+                     <td>{formatNumber(data["3v3_wins"])}</td>
+                     <td>{formatNumber(data["3v3_losses"])}</td>
+                     <td>{formatNumber(data["3v3_kills"])}</td>
+                     <td>{formatNumber(data["3v3_deaths"])}</td>
+                     <td>{formatNumber(data["3v3_final_kills"])}</td>
+                     <td>{formatNumber(data["3v3_final_deaths"])}</td>
+                     <td>{formatNumber(data["3v3_beds_broken"])}</td>
                      <td>
                         {calculateRatio(data["3v3_wins"], data["3v3_losses"])}
                      </td>
@@ -279,13 +260,13 @@ function Bedwars({ data }: BedwarsProps) {
 
                   <tr>
                      <td>4v4</td>
-                     <td>{formatNumber(data["4v4_wins"]) || "-"}</td>
-                     <td>{formatNumber(data["4v4_losses"]) || "-"}</td>
-                     <td>{formatNumber(data["4v4_kills"]) || "-"}</td>
-                     <td>{formatNumber(data["4v4_deaths"]) || "-"}</td>
-                     <td>{formatNumber(data["4v4_final_kills"]) || "-"}</td>
-                     <td>{formatNumber(data["4v4_final_deaths"]) || "-"}</td>
-                     <td>{formatNumber(data["4v4_beds_broken"]) || "-"}</td>
+                     <td>{formatNumber(data["4v4_wins"])}</td>
+                     <td>{formatNumber(data["4v4_losses"])}</td>
+                     <td>{formatNumber(data["4v4_kills"])}</td>
+                     <td>{formatNumber(data["4v4_deaths"])}</td>
+                     <td>{formatNumber(data["4v4_final_kills"])}</td>
+                     <td>{formatNumber(data["4v4_final_deaths"])}</td>
+                     <td>{formatNumber(data["4v4_beds_broken"])}</td>
                      <td>
                         {calculateRatio(data["4v4_wins"], data["4v4_losses"])}
                      </td>

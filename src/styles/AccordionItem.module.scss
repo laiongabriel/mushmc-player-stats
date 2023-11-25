@@ -10,11 +10,9 @@
    grid-template-columns: max-content 1fr max-content;
    align-items: center;
    justify-content: space-evenly;
-   gap: 1rem;
-   margin-bottom: 0.5rem;
 
    cursor: pointer;
-   padding: 0.5rem 1.5rem;
+   padding: 0.8rem 1.5rem;
    transition: 0.2s;
 
    background-color: App.$lightgrey;
@@ -22,13 +20,23 @@
    border: 2px solid #d1dae3;
    box-shadow: 2px 4px 8px -3px rgba(0, 0, 0, 0.15);
 
-   .accordionDesc {
+   .minigameName {
       display: flex;
       gap: 1rem;
+      align-items: center;
+
+      img {
+         width: 40px;
+      }
+   }
+
+   .accordionDesc {
+      display: flex;
+      gap: 2rem;
       justify-content: center;
       align-items: center;
 
-      .bedwarsLevel {
+      .minigameLevel {
          font-size: 1.1rem;
       }
    }
@@ -36,7 +44,7 @@
    .accordionItemButton {
       border: none;
       background: none;
-      transition: 0.3s;
+      transition: 0.3s ease-in-out;
    }
 }
 
@@ -54,13 +62,12 @@
 .panel {
    max-height: 0px;
    overflow: hidden;
-   transition: max-height 0.2s ease-out;
-   border-radius: 4px;
-   box-shadow: 2px 4px 8px -3px rgba(0, 0, 0, 0.15);
+   transition: max-height 0.3s ease-out;
 
    table {
       width: 100%;
       border-collapse: collapse;
+      margin: 1rem 0 1.2rem;
 
       td,
       th {

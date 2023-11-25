@@ -1,24 +1,25 @@
 import useFetch from "../hooks/useFetch";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import styles from "../styles/PlayerPage.module.scss";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import PlayerNotFound from "./PlayerNotFound";
 import Bedwars from "./Minigames/Bedwars";
+import Skywars from "./Minigames/Skywars";
 import PlayerSummary from "./PlayerSummary";
 import React from "react";
+import HungerGames from "./Minigames/HungerGames";
 
 function PlayerPage() {
    const { playerName } = useParams();
+   const local = useLocation();
+   console.log(local);
    const { data, loading, error } = useFetch<PlayerData>(
       `https://mush.com.br/api/player/${playerName}`
    );
 
    React.useEffect(() => {
-      window.scrollTo({
-         top: 0,
-         behavior: "smooth",
-      });
-   }, [playerName]);
+      window.scrollTo(0, 0);
+   }, [local.pathname]);
 
    if (loading) {
       document.title = "Carregando... | MushMC Player Stats";
@@ -50,6 +51,8 @@ function PlayerPage() {
 
          <section className={`${styles.statsContainer} animeLeft`}>
             <Bedwars data={data.response.stats.bedwars} />
+            <Skywars data={data.response.stats.skywars_r1} />
+            <HungerGames data={data.response.stats.hungergames} />
          </section>
       </HelmetProvider>
    );

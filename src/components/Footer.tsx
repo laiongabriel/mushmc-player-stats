@@ -6,7 +6,8 @@ function Footer() {
          Desenvolvido por{" "}
          <a href="https://github.com/laiongabriel" target="_blank">
             Laion Gabriel
-         </a>
+         </a>{" "}
+         &#10084;
       </footer>
    );
 }
