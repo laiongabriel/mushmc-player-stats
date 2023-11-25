@@ -39,8 +39,13 @@ function Header() {
                   <img src={SearchIcon} alt="Ícone de pesquisa" />
                </button>
             </form>
-            <div className={styles.about}>
-               <Link to={"/sobre"}>Sobre</Link>
+            <div className={styles.github}>
+               <a
+                  href="https://github.com/laiongabriel/mushmc-player-stats"
+                  target="_blank"
+               >
+                  GitHub
+               </a>
             </div>
          </div>
       </header>

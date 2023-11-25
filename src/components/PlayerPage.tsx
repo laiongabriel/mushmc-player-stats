@@ -9,23 +9,24 @@ import React from "react";
 
 function PlayerPage() {
    const { playerName } = useParams();
-   const [skeleton, setSkeleton] = React.useState(true);
    const { data, loading, error } = useFetch<PlayerData>(
       `https://mush.com.br/api/player/${playerName}`
    );
 
-   function handlePlayerHeadLoad(e: React.SyntheticEvent<HTMLImageElement>) {
-      setSkeleton(false);
-      e.currentTarget.style.opacity = "1";
-   }
-
    React.useEffect(() => {
-      setSkeleton(true);
+      window.scrollTo({
+         top: 0,
+         behavior: "smooth",
+      });
    }, [playerName]);
 
    if (loading) {
       document.title = "Carregando... | MushMC Player Stats";
-      return <p>Carregando...</p>;
+      return (
+         <div className="loadingContainer">
+            <div className="loading"></div>
+         </div>
+      );
    }
    if (error) return <p>{error}</p>;
    if (data?.success === false) return <PlayerNotFound />;
@@ -43,19 +44,13 @@ function PlayerPage() {
             />
          </Helmet>
 
-         <main>
-            <section className={styles.playerSummaryContainer}>
-               <PlayerSummary
-                  data={data}
-                  skeleton={skeleton}
-                  handlePlayerHeadLoad={handlePlayerHeadLoad}
-               />
-            </section>
+         <section className={`${styles.playerSummaryContainer} animeLeft`}>
+            <PlayerSummary data={data} />
+         </section>
 
-            <section className={styles.statsContainer}>
-               <Bedwars data={data.response.stats.bedwars} />
-            </section>
-         </main>
+         <section className={`${styles.statsContainer} animeLeft`}>
+            <Bedwars data={data.response.stats.bedwars} />
+         </section>
       </HelmetProvider>
    );
 }

@@ -6,7 +6,7 @@ function useOpenAccordion() {
 
    function handleAccordionClick({
       currentTarget,
-   }: React.MouseEvent<HTMLButtonElement>) {
+   }: React.MouseEvent<HTMLDivElement>) {
       currentTarget.classList.toggle(styles.active);
       if (accordionPanel.current) {
          if (

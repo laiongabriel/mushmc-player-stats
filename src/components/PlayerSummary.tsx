@@ -5,15 +5,16 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 type PlayerSummaryProps = {
    data: PlayerData;
-   skeleton: boolean;
-   handlePlayerHeadLoad(e: React.SyntheticEvent<HTMLImageElement>): void;
 };
 
-function PlayerSummary({
-   data,
-   skeleton,
-   handlePlayerHeadLoad,
-}: PlayerSummaryProps) {
+function PlayerSummary({ data }: PlayerSummaryProps) {
+   const [skeleton, setSkeleton] = React.useState(true);
+
+   function handlePlayerHeadLoad(e: React.SyntheticEvent<HTMLImageElement>) {
+      setSkeleton(false);
+      e.currentTarget.style.opacity = "1";
+   }
+
    function millisecondsToDate(milliseconds: number) {
       const date = new Date(milliseconds);
       const formattedDate = date.toLocaleString("pt-BR", {
@@ -57,7 +58,9 @@ function PlayerSummary({
                <dt>Status</dt>
                <dd>
                   {data.response.connected ? (
-                     <span style={{ color: "#0db91b" }}>Online</span>
+                     <span style={{ color: "#0db91b", fontWeight: "600" }}>
+                        Online
+                     </span>
                   ) : (
                      <span style={{ color: "#9b9b9b" }}>Offline</span>
                   )}
@@ -94,6 +97,7 @@ function PlayerSummary({
                      <span
                         style={{
                            color: `${data.response.clan.tag_color}`,
+                           fontWeight: "600",
                            textShadow: "1px 1px 1px rgba(0, 0, 0, 0.25)",
                         }}
                      >
@@ -111,6 +115,7 @@ function PlayerSummary({
                   <span
                      style={{
                         color: `${data.response.best_tag.color}`,
+                        fontWeight: "600",
                         textShadow: "1px 1px 1px rgba(0, 0, 0, 0.3)",
                      }}
                   >
