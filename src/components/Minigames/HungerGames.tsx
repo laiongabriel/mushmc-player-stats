@@ -15,7 +15,11 @@ function HungerGames({ data }: HungerGamesProps) {
       <div className={styles.accordionContainer}>
          <div className={styles.accordion} onClick={handleAccordionClick}>
             <div className={styles.minigameName}>
-               <img src={HGIcon} alt="Sopa" />
+               <img
+                  src={HGIcon}
+                  alt="Sopa"
+                  style={{ position: "relative", top: "-2px" }}
+               />
                <h2>Hunger Games</h2>
             </div>
 
