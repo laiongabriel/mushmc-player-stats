@@ -38,6 +38,14 @@ function PlayerPage() {
             <title>
                {data.response.account.username} | MushMC Player Stats
             </title>
+            <meta
+               property="og:image"
+               content={`https://mineskin.eu/helm/${playerName}/75.png`}
+            />
+            <meta
+               name="description"
+               content={`Estatísticas do jogador ${data.response.account.username}`}
+            />
             <link
                rel="shortcut icon"
                href={`https://mineskin.eu/helm/${playerName}/16.png`}
