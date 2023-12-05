@@ -1,24 +1,18 @@
 import useFetch from "../hooks/useFetch";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styles from "../styles/PlayerPage.module.scss";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import PlayerNotFound from "./PlayerNotFound";
+import PlayerNotFound from "./Helper/PlayerNotFound";
 import Bedwars from "./Minigames/Bedwars";
 import Skywars from "./Minigames/Skywars";
 import PlayerSummary from "./PlayerSummary";
-import React from "react";
 import HungerGames from "./Minigames/HungerGames";
 
 function PlayerPage() {
    const { playerName } = useParams();
-   const { pathname } = useLocation();
    const { data, loading, error } = useFetch<PlayerData>(
       `https://mush.com.br/api/player/${playerName}`
    );
-
-   React.useEffect(() => {
-      window.scrollTo(0, 0);
-   }, [pathname]);
 
    if (loading) {
       document.title = "Carregando... | MushMC Player Stats";
@@ -38,14 +32,6 @@ function PlayerPage() {
             <title>
                {data.response.account.username} | MushMC Player Stats
             </title>
-            <meta
-               property="og:image"
-               content={`https://mineskin.eu/helm/${playerName}/75.png`}
-            />
-            <meta
-               name="description"
-               content={`Estatísticas do jogador ${data.response.account.username}`}
-            />
             <link
                rel="shortcut icon"
                href={`https://mineskin.eu/helm/${playerName}/16.png`}
