@@ -11,21 +11,21 @@ import HungerGames from "./Minigames/HungerGames";
 
 function PlayerPage() {
    const { playerName } = useParams();
-   const local = useLocation();
-   console.log(local);
+   const { pathname } = useLocation();
    const { data, loading, error } = useFetch<PlayerData>(
       `https://mush.com.br/api/player/${playerName}`
    );
 
    React.useEffect(() => {
       window.scrollTo(0, 0);
-   }, [local.pathname]);
+   }, [pathname]);
 
    if (loading) {
       document.title = "Carregando... | MushMC Player Stats";
       return (
          <div className="loadingContainer">
             <div className="loading"></div>
+            <p>Carregando estatísticas de {playerName}...</p>
          </div>
       );
    }

@@ -24,7 +24,6 @@
 
    form {
       display: flex;
-      gap: 0.5rem;
       padding: 1rem 0;
       flex-grow: 3;
       flex-shrink: 1;
@@ -33,9 +32,10 @@
          width: 100%;
          padding: 0.4rem 0.8rem;
          transition: 0.2s;
-         border-radius: 4px;
+         border-radius: 4px 0px 0px 4px;
          background-color: #f5f5f5;
          border: 2px solid #d1dae3;
+         border-right: none;
       }
 
       input:focus {
@@ -45,7 +45,7 @@
       .searchButton {
          color: #2d2d2d;
          padding: 0 0.8rem;
-         border-radius: 4px;
+         border-radius: 0px 4px 4px 0px;
          background-color: #cee1f4;
          border: 2px solid #c5d7e9;
          transition: 0.2s;
