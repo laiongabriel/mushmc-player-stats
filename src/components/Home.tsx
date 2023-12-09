@@ -7,7 +7,7 @@ function Home() {
             <title>MushMC Player Stats</title>
             <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
          </Helmet>
-         <div className="animeLeft">
+         <div>
             <h1>Home</h1>
             <p>Em desenvolvimento</p>
          </div>

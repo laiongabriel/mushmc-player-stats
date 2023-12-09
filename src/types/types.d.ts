@@ -26,6 +26,7 @@ type PlayerData = {
          bedwars: BedwarsStats;
          skywars_r1: SkywarsStats;
          hungergames: HungerGamesStats;
+         pvp: PvPStats;
       };
    };
 };
@@ -194,4 +195,17 @@ interface HungerGamesStats {
    mode_quarterquell_deaths?: number;
    mode_quarterquell_kills?: number;
    mode_quarterquell_wins?: number;
+}
+
+interface PvPStats {
+   coins?: number;
+   arena_deaths?: number;
+   arena_kills?: number;
+   arena_killstreak?: number;
+   arena_max_killstreak?: number;
+
+   fps_deaths?: number;
+   fps_kills?: number;
+   fps_killstreak?: number;
+   fps_max_killstreak?: number;
 }

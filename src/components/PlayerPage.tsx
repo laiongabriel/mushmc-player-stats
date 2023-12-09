@@ -7,6 +7,7 @@ import Bedwars from "./Minigames/Bedwars";
 import Skywars from "./Minigames/Skywars";
 import PlayerSummary from "./PlayerSummary";
 import HungerGames from "./Minigames/HungerGames";
+import PvP from "./Minigames/PvP";
 
 function PlayerPage() {
    const { playerName } = useParams();
@@ -47,6 +48,7 @@ function PlayerPage() {
             <Bedwars data={data.response.stats.bedwars} />
             <Skywars data={data.response.stats.skywars_r1} />
             <HungerGames data={data.response.stats.hungergames} />
+            <PvP data={data.response.stats.pvp} />
          </section>
       </HelmetProvider>
    );
