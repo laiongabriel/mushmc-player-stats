@@ -5,7 +5,7 @@ import PvPIcon from "../../assets/img/icons/pvp.png";
 import { calculateRatio, formatNumber } from "../../functions.ts";
 
 type PvPProps = {
-   data: PvPStats;
+   data: PvPStats | null;
 };
 
 function PvP({ data }: PvPProps) {
@@ -32,7 +32,9 @@ function PvP({ data }: PvPProps) {
                         fontSize: "1.1rem",
                      }}
                   >
-                     {data.coins && formatNumber(Math.floor(data.coins / 10))}
+                     {data?.coins
+                        ? formatNumber(Math.floor(data.coins / 10))
+                        : "-"}
                   </span>
                </p>
             </div>
@@ -57,21 +59,23 @@ function PvP({ data }: PvPProps) {
                <tbody>
                   <tr>
                      <td>Arena</td>
-                     <td>{formatNumber(data.arena_kills)}</td>
-                     <td>{formatNumber(data.arena_deaths)}</td>
-                     <td>{formatNumber(data.arena_killstreak)}</td>
-                     <td>{formatNumber(data.arena_max_killstreak)}</td>
+                     <td>{formatNumber(data?.arena_kills)}</td>
+                     <td>{formatNumber(data?.arena_deaths)}</td>
+                     <td>{formatNumber(data?.arena_killstreak)}</td>
+                     <td>{formatNumber(data?.arena_max_killstreak)}</td>
                      <td>
-                        {calculateRatio(data.arena_kills, data.arena_deaths)}
+                        {calculateRatio(data?.arena_kills, data?.arena_deaths)}
                      </td>
                   </tr>
                   <tr>
                      <td>FPS</td>
-                     <td>{formatNumber(data.fps_kills)}</td>
-                     <td>{formatNumber(data.fps_deaths)}</td>
-                     <td>{formatNumber(data.fps_killstreak)}</td>
-                     <td>{formatNumber(data.fps_max_killstreak)}</td>
-                     <td>{calculateRatio(data.fps_kills, data.fps_deaths)}</td>
+                     <td>{formatNumber(data?.fps_kills)}</td>
+                     <td>{formatNumber(data?.fps_deaths)}</td>
+                     <td>{formatNumber(data?.fps_killstreak)}</td>
+                     <td>{formatNumber(data?.fps_max_killstreak)}</td>
+                     <td>
+                        {calculateRatio(data?.fps_kills, data?.fps_deaths)}
+                     </td>
                   </tr>
                </tbody>
             </table>
