@@ -41,7 +41,9 @@ function PlayerSummary({ data }: PlayerSummaryProps) {
             {skeleton && <Skeleton width={150} height={146} borderRadius={4} />}
             <img
                onLoad={handlePlayerHeadLoad}
-               src={`https://mineskin.eu/helm/${data.response.account.username}/150.png`}
+               src={`https://visage.surgeplay.com/face/150/${
+                  data.response.skin?.hash || data.response.account.username
+               }`}
                alt={`Skin de ${data.response.account.username}`}
             />
             {data.response.banned ? (

@@ -22,6 +22,9 @@ type PlayerData = {
       };
       first_login?: number;
       last_login?: number;
+      skin?: {
+         hash: string;
+      };
       stats: {
          bedwars: BedwarsStats;
          skywars_r1: SkywarsStats;

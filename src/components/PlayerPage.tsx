@@ -35,7 +35,9 @@ function PlayerPage() {
             </title>
             <link
                rel="shortcut icon"
-               href={`https://mineskin.eu/helm/${playerName}/16.png`}
+               href={`https://visage.surgeplay.com/face/16/${
+                  data.response.skin?.hash || data.response.account.username
+               }`}
                type="image/x-icon"
             />
          </Helmet>
